@@ -4,12 +4,12 @@ algorithm=$1
 inputFile=$2
 outputFile=$3
 
-if [ $algorithm = "Bubblesort" ]; then
-	python3 sort/bubble_sort.py
-elif [ $algorithm = $"Shellsort" ]; then
-	python3 sort/shell_sort.py
-elif [ $algorithm = "Mergesort" ]; then
-	python3 sort/merge_sort.py
-elif [ $algorithm = "Quicksort" ]; then
-	python3 sort/quick_sort.py
+if [ $algorithm = $"bubblesort" ]; then
+	python sort/bubble_sort.py $inputFile $outputFile
+elif [ $algorithm = $"shellsort" ]; then
+	python sort/shell_sort.py $inputFile $outputFile
+elif [ $algorithm = $"mergesort" ]; then
+	python sort/merge_sort.py $inputFile $outputFile
+elif [ $algorithm = $"quicksort" ]; then
+	python sort/quick_sort.py $inputFile $outputFile
 fi

@@ -1,15 +1,30 @@
 """
 This is a pure python implementation of the quick sort algorithm
 
-For doctests run following command:
-python -m doctest -v quick_sort.py
-or
-python3 -m doctest -v quick_sort.py
-
-For manual testing run:
-python quick_sort.py
 """
-from __future__ import print_function
+
+import os
+
+import pandas
+import time
+
+def quick_sort_wrapper(file_path, output_path):
+
+    file_size = os.path.getsize(os.getcwd() + "/" + input_file)
+
+    numbers_unsorted = open(file_path, "r")
+    collection = map(int, [line.strip().split(' ') for line in numbers_unsorted.readlines()][0])
+
+    start_time = time.clock()
+    numbers_sorted = quick_sort(collection)
+    end_time = time.clock()
+
+    data = {'total time': end_time - start_time ,'algorithm': "mergesort", 'file size': file_size}
+    dataframe = pandas.DataFrame([data], columns=['total time', 'algorithm', 'file size'])
+
+    dataframe.to_csv(output_path)
+
+    return numbers_sorted
 
 
 def quick_sort(ARRAY):
@@ -19,16 +34,8 @@ def quick_sort(ARRAY):
     comparable items inside
     :return: the same collection ordered by ascending
 
-    Examples:
-    >>> quick_sort([0, 5, 3, 2, 2])
-    [0, 2, 2, 3, 5]
-
-    >>> quick_sort([])
-    []
-
-    >>> quick_sort([-2, -5, -45])
-    [-45, -5, -2]
     """
+
     ARRAY_LENGTH = len(ARRAY)
     if( ARRAY_LENGTH <= 1):
         return ARRAY
@@ -38,17 +45,14 @@ def quick_sort(ARRAY):
         LESSER = [ element for element in ARRAY[1:] if element <= PIVOT ]
         return quick_sort(LESSER) + [PIVOT] + quick_sort(GREATER)
 
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     import sys
+    import os
 
-    # For python 2.x and 3.x compatibility: 3.x has not raw_input builtin
-    # otherwise 2.x's input builtin function is too "smart"
-    if sys.version_info.major < 3:
-        input_function = raw_input
-    else:
-        input_function = input
+    dir_path = os.getcwd()
 
-    user_input = input_function('Enter numbers separated by a comma:\n')
-    unsorted = [ int(item) for item in user_input.split(',') ]
-    print( quick_sort(unsorted) )
+    input_file = sys.argv[1]
+    output_file = sys.argv[2]
+    
+    quick_sort_wrapper(dir_path + "/" + input_file,  dir_path + "/results/" + output_file)
+    
