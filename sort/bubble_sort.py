@@ -5,8 +5,11 @@ This is pure python implementation of bubble sort algorithm
 
 import os
 
+import statistics
 import pandas
 import time
+
+from memory_profiler import memory_usage
 
 def bubble_sort(file_path, output_path):
     """Pure implementation of bubble sort algorithm in Python
@@ -42,5 +45,13 @@ if __name__ == "__main__":
 
     input_file = sys.argv[1]
     output_file = sys.argv[2]
+
+    tuple_function = (bubble_sort,(dir_path + "/" + input_file, dir_path + "/results/" + output_file))
+
+    mem_usage = memory_usage(tuple_function, .001)
+
+    dataframe = pandas.read_csv(dir_path + "/results/" + output_file, index_col=0)
+    dataframe["memory usage"] = statistics.mean(mem_usage)
     
-    bubble_sort(dir_path + "/" + input_file, dir_path + "/results/" + output_file)
+    dataframe.to_csv(dir_path + "/results/" + output_file)
+    

@@ -5,8 +5,11 @@ This is a pure python implementation of the merge sort algorithm
 
 import os
 
+import statistics
 import pandas
 import time
+
+from memory_profiler import memory_usage
 
 def merge_sort_wrapper(file_path, output_path):
 
@@ -68,11 +71,17 @@ def merge_sort(collection):
 
 if __name__ == "__main__":
     import sys
-    import os
 
     dir_path = os.getcwd()
 
     input_file = sys.argv[1]
     output_file = sys.argv[2]
+
+    tuple_function = (merge_sort_wrapper,(dir_path + "/" + input_file, dir_path + "/results/" + output_file))
+
+    mem_usage = memory_usage(tuple_function, .001)
+
+    dataframe = pandas.read_csv(dir_path + "/results/" + output_file, index_col=0)
+    dataframe["memory usage"] = statistics.mean(mem_usage)
     
-    merge_sort_wrapper(dir_path + "/" + input_file,  dir_path + "/results/" + output_file)
+    dataframe.to_csv(dir_path + "/results/" + output_file)

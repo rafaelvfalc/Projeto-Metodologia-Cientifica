@@ -5,8 +5,11 @@ This is a pure python implementation of the quick sort algorithm
 
 import os
 
+import statistics
 import pandas
 import time
+
+from memory_profiler import memory_usage
 
 def quick_sort_wrapper(file_path, output_path):
 
@@ -19,7 +22,7 @@ def quick_sort_wrapper(file_path, output_path):
     numbers_sorted = quick_sort(collection)
     end_time = time.clock()
 
-    data = {'total time': end_time - start_time ,'algorithm': "mergesort", 'file size': file_size}
+    data = {'total time': end_time - start_time ,'algorithm': "quicksort", 'file size': file_size}
     dataframe = pandas.DataFrame([data], columns=['total time', 'algorithm', 'file size'])
 
     dataframe.to_csv(output_path)
@@ -47,12 +50,18 @@ def quick_sort(ARRAY):
 
 if __name__ == "__main__":
     import sys
-    import os
 
     dir_path = os.getcwd()
 
     input_file = sys.argv[1]
     output_file = sys.argv[2]
+
+    tuple_function = (quick_sort_wrapper,(dir_path + "/" + input_file, dir_path + "/results/" + output_file))
+
+    mem_usage = memory_usage(tuple_function, .001)
+
+    dataframe = pandas.read_csv(dir_path + "/results/" + output_file, index_col=0)
+    dataframe["memory usage"] = statistics.mean(mem_usage)
     
-    quick_sort_wrapper(dir_path + "/" + input_file,  dir_path + "/results/" + output_file)
+    dataframe.to_csv(dir_path + "/results/" + output_file)
     
