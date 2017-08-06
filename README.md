@@ -22,17 +22,18 @@ Entre no diretório do projeto (Projeto-Metodologia-Cientifica) e rode o comando
     $ ./ordenar algorithm input.txt output.txt
 
 Sendo:
-	- algortihm: O algoritmo que se quer utilizar na experimentação. (Opções: bubblesort, shellsort, mergesort, quicksort)
 
-	- input.txt: Arquivo com números desordenados que irá ser utilizado para a realização da experimentação
+- algortihm: O algoritmo que se quer utilizar na experimentação. (Opções: bubblesort, shellsort, mergesort, quicksort)
 
-	- output.txt: Arquivo com os resultados da experimentação. Estarão contido nesse file as seguintes informações:
+- input.txt: Arquivo com números desordenados que irá ser utilizado para a realização da experimentação
 
-    	* total time: O tempo total para ser rodado o algoritmo escolhido usando o input file
+- output.txt: Arquivo com os resultados da experimentação. Estarão contido nesse file as seguintes informações:
 
-    	* algorithm: Algoritmo usado na experimentação
+    * total time: O tempo total para ser rodado o algoritmo escolhido usando o input file
 
-    	* file size: Tamanho do input file usado na experimentação
+    * algorithm: Algoritmo usado na experimentação
 
-    	* memory usage: Memória usada na realização do algoritmo escolhido usando o input file
+    * file size: Tamanho do input file usado na experimentação
+
+    * memory usage: Memória usada na realização do algoritmo escolhido usando o input file
 
