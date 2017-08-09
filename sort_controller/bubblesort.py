@@ -5,10 +5,10 @@ This is pure python implementation of bubble sort algorithm
 import os
 
 import statistics
-#import pandas
+import pandas
 import time
 
-#from memory_profiler import memory_usage
+from memory_profiler import memory_usage
 
 global data
 

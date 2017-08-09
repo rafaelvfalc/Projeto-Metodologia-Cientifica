@@ -52,3 +52,9 @@ Sendo:
     Obs: O nome do arquivo que conterá o resultado dos experimentos deve ser único, ou seja, nenhum outro file no diretório 'results' deve conter o mesmo nome.
 
 O resultado do seu experimento estará contido na pasta 'results' com o nome informado pela variável 'output.txt'
+
+# Como testar os algoritmos de ordenação?
+
+Vá para o diretório principal do projeto (Projeto-Metodologia-Cientifica) e rode o seguinte comando:
+
+    $ pytest test_sort_algorithms.py
